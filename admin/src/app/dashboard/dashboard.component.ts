@@ -8,28 +8,46 @@ declare var require: any;
 export class DashboardComponent implements AfterViewInit {
   subtitle: string;
   pedidos:Array<any> = []
+  repartidores:Array<any> = []
+  estadisticas:any = {}
+
   constructor(
     private dashboardService:DashboardService
   ) {
     this.subtitle = 'This is some text within a card block.';
   }
-
-  async getPedidosCreados(){
-    this.pedidos = await this.dashboardService.getDataDashboard()
-    console.log('pedidos' , this.pedidos);
-    
-  }
-
+  
   async ngOnInit() {
     await this.getPedidosCreados()
   }
+  
+    async getPedidosCreados(){
+      await this.getRepartidores()
+      this.pedidos = await this.dashboardService.getDataDashboard()
+      await this.getEstadisticas()
+      console.log('pedidos' , this.pedidos);
+      
+    }
+  
+    async getEstadisticas(){
+      this.estadisticas = await this.dashboardService.getEstadisticas()
+    }
+
+    async getRepartidores(){
+      this.repartidores = await this.dashboardService.getRepartidores()
+    }
+
+    async asignarRepartidor(repartidor , pedido){
+      await this.dashboardService.asignarRepartidor(repartidor , pedido)
+      await this.getPedidosCreados()
+    }
 
 
 
   // lineChart
   public lineChartData: Array<any> = [
-    { data: [0, 5, 6, 8, 25, 9, 8, 24], label: 'Iphone'},
-    { data: [0, 3, 1, 2, 8, 1, 5, 1], label: 'Ipad' }
+    { data: [0, 5, 6, 8, 25, 9, 8], label: 'Pedidos'},
+    { data: [0, 3, 1, 2, 8, 1, 5], label: 'Entregados' }
   ];
   public lineChartLabels: Array<any> = [
     '1',
@@ -39,7 +57,7 @@ export class DashboardComponent implements AfterViewInit {
     '5',
     '6',
     '7',
-    '8',
+
   ];
   public lineChartOptions: any = {
     responsive: true,
