@@ -90,92 +90,29 @@
                             <th class="border-top-0">License</th>
                             <th class="border-top-0">Support Agent</th>
                             <th class="border-top-0">Technology</th>
-                            <th class="border-top-0">Tickets</th>
-                            <th class="border-top-0">Sales</th>
-                            <th class="border-top-0">Earnings</th>
+                            <th class="border-top-0">Tickets</th> 
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr *ngFor="let pedido of pedidos">
                             <td>
                                 <div class="d-flex align-items-center">
                                     <div class="m-r-10"><a class="btn btn-circle btn-info text-white">E</a></div>
                                     <div class="">
-                                        <h4 class="m-b-0 font-16">Elite Admin</h4>
+                                        <h4 class="m-b-0 font-16">{{pedido.nombres |uppercase}}</h4>
                                     </div>
                                 </div>
                             </td>
-                            <td>Single Use</td>
-                            <td>John Doe</td>
+                            <td>{{pedido.telefono}}</td>
+                            <td>{{pedido.fecha | date: 'dd/MM/yyyy'}}</td>
                             <td>
-                                <label class="label label-danger">Angular</label>
+                                <label class="label label-success" [ngClass]="{'label-danger': pedido.id_estado==1 , 'label-warning':pedido.id_estado==3}">{{pedido.descripcion}}</label>
+                                
                             </td>
-                            <td>46</td>
-                            <td>356</td>
-                            <td>
-                                <h5 class="m-b-0">$2850.06</h5>
-                            </td>
+                            <td>{{pedido.total}}</td>
+ 
                         </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="m-r-10"><a class="btn btn-circle btn-orange text-white">M</a></div>
-                                    <div class="">
-                                        <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Single Use</td>
-                            <td>Venessa Fern</td>
-                            <td>
-                                <label class="label label-info">Vue Js</label>
-                            </td>
-                            <td>46</td>
-                            <td>356</td>
-                            <td>
-                                <h5 class="m-b-0">$2850.06</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="m-r-10"><a class="btn btn-circle btn-success text-white">M</a></div>
-                                    <div class="">
-                                        <h4 class="m-b-0 font-16">Material Pro Admin</h4>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Single Use</td>
-                            <td>John Doe</td>
-                            <td>
-                                <label class="label label-success">Bootstrap</label>
-                            </td>
-                            <td>46</td>
-                            <td>356</td>
-                            <td>
-                                <h5 class="m-b-0">$2850.06</h5>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="m-r-10"><a class="btn btn-circle btn-purple text-white">A</a></div>
-                                    <div class="">
-                                        <h4 class="m-b-0 font-16">Ample Admin</h4>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>Single Use</td>
-                            <td>John Doe</td>
-                            <td>
-                                <label class="label label-purple">React</label>
-                            </td>
-                            <td>46</td>
-                            <td>356</td>
-                            <td>
-                                <h5 class="m-b-0">$2850.06</h5>
-                            </td>
-                        </tr>
+ 
                     </tbody>
                 </table>
             </div>

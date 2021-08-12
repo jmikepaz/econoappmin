@@ -1,4 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { DashboardService } from './services/dashboard.service';
 declare var require: any;
 
 @Component({
@@ -6,9 +7,25 @@ declare var require: any;
 })
 export class DashboardComponent implements AfterViewInit {
   subtitle: string;
-  constructor() {
+  pedidos:Array<any> = []
+  constructor(
+    private dashboardService:DashboardService
+  ) {
     this.subtitle = 'This is some text within a card block.';
   }
+
+  async getPedidosCreados(){
+    this.pedidos = await this.dashboardService.getDataDashboard()
+    console.log('pedidos' , this.pedidos);
+    
+  }
+
+  async ngOnInit() {
+    await this.getPedidosCreados()
+  }
+
+
+
   // lineChart
   public lineChartData: Array<any> = [
     { data: [0, 5, 6, 8, 25, 9, 8, 24], label: 'Iphone'},
